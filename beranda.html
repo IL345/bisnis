@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <style>
+    .search-container {
+    position: relative;
+}
+
+.search-input {
+    width: 200px;
+    padding: 5px 40px 10px 50px;
+    border: 3px solid #007BFF;
+    border-radius: 25px;
+    outline: none;
+    font-size: 16px;
+    transition: width 0.4s ease;
+}
+
+.search-input:focus {
+    width: 300px;
+}
+
+.search-button {
+    position: absolute;
+    left: 10px;
+    top: 26%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    font-size: 19px;
+    cursor: pointer;
+}
+
+.results {
+    margin-top: 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease;
+    opacity: 0;
+    border: 1px solid #007BFF;
+    border-radius: 10px;
+    background: blue;
+}
+
+.results.show {
+    max-height: 200px;
+    opacity: 1;
+}
+
+.results-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.results-item:last-child {
+    border-bottom: none;
+}
+
+
+
+
+
+
+        /* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+}
+/* Header */
+header {
+    background: skyblue;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.logo h1 {
+    display: inline;
+}
+
+nav ul {
+    list-style: none;
+    display: inline;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+
+
+ {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+   
+   
+}
+
+.content {
+    text-align: left;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: left;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    background-color: #fff;
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding: 10px 15px;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 20px;
+}
+
+.back-button:hover {
+    background-color: skyblue;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Produk Section */
+.produk-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.produk-item {
+    border: 1px solid skyblue;
+    padding: 10px;
+    width: 30%;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.produk-item img {
+    max-width: 100%;
+}
+
+.produk-item h3 {
+    font-size: 1.2em;
+}
+
+.produk-item p {
+    font-size: 1.1em;
+    color: #333;
+}
+
+.produk-item a {
+    display: block;
+    margin-top: 10px;
+    color:#333;
+    text-decoration: none;
+}
+
+
+         .buy-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .buy-button:hover {
+            background-color: #2980b9;
+        }
+
+
+
+
+
+
+
+
+
+/* Hero Section */
+.hero {
+    background: #f4f4f4;
+    text-align: left;
+    padding: 50px 0;
+}
+
+.hero h2 {
+    font-size: 2em;
+}
+
+.hero p {
+    font-size: 1.2em;
+}
+
+.hero button {
+    padding: 10px 17px;
+    border: none;
+    background: deepskyblue;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+/* Info Perusahaan Section */
+.info-perusahaan {
+    padding: 20px 0;
+    background: skyblue;
+    text-align: center;
+}
+
+.contact-info p {
+    margin: 10px 0;
+}
+
+.info-perusahaan a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #333;
+    text-decoration: none;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+footer nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer .social-media a {
+    margin: 0 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+footer p {
+    margin-top: 10px;
+}
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+
+
+             <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Cari sesuatu..." class="search-input">
+        <button id="searchButton" class="search-button">
+            🔍
+        </button>
+        <div id="results" class="results"></div>
+    </div>
+
+
+              
+              <img src="D:\PRODUKSI WEBSITE\foto pembuatan web\logo inoac.jfif"align="center"width="400px"height="200px">
+             <h3><marquee><font face="Times New Roman"><font color="indigo">Ayo Beli Produk Kami,</font><font color="gold">Harga Murah Dan Juga Bekualitas</font></font></font></marquee></h3> 
+            </div>
+     <div class="nav">
+            <p align="center"> <b><a href="beranda.html">Beranda</a></b>
+             <b><a href="komen.html">Kesan&Saran</a></b>
+             <b><a href="halamanutama.html">Kembali</a></b></p>
+    </div>
+    <script src="script.js"></script>
+
+     <script>
+        // script.js
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const resultsContainer = document.getElementById('results');
+    
+    searchInput.addEventListener('input', function() {
+        const query = searchInput.value.trim();
+        
+        // Tampilkan hasil pencarian (dummy data)
+        if (query.length > 0) {
+            // Dummy data untuk contoh
+            const dummyResults = [
+                'kasur inoac',
+                'Hasil pencarian 2',
+                'Hasil pencarian 3'
+            ];
+
+            resultsContainer.innerHTML = dummyResults
+                .filter(result => result.toLowerCase().includes(query.toLowerCase()))
+                .map(result => `<div class="results-item">${result}</div>`)
+                .join('');
+
+            resultsContainer.classList.add('show');
+        } else {
+            resultsContainer.classList.remove('show');
+        }
+    });
+});
+
+    </script>
+
+   
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h4>Temukan Produk Terbaik Kami</h4>
+            <p>Kualitas Terjamin dengan Harga Terbaik</p>
+            <div class="nav">
+            <p align="left"><button type="button"><small><a href="semuaproduk.html">Jelajahi Semua Produk</a></small></button><br>
+                 <a href="http://il345.github.io/planet/" class="back-button"><b>Masuk</b></a>
+
+        </div>
+    </section>
+
+    <!-- Informasi Produk -->
+    <section class="info-produk">
+        <div class="container">
+             <div class="nav">
+             <b><p align="right"><a href="produkrekomendasi.html">Lihat semua</a></p></b>
+            <h3>Produk Terbaru Kami</h3>
+
+            <div class="produk-list">
+                <div class="produk-item">
+                <img src="D:\PRODUKSI WEBSITE\foto pembuatan web\logo inoac.jfif"align="center"width="80px"height="80px">
+                    <h3>Kasur Inoac</h3>
+                    <p>Rp100.000</p>
+                     <a href="#" class="buy-button">Beli Sekarang</a>
+                </div>
+                 <div class="produk-item">
+                <img src="D:\PRODUKSI WEBSITE\foto pembuatan web\logo inoac.jfif"align="center"width="80px"height="80px">
+                    <h3>Nama Produk 1</h3>
+                    <p>Rp100.000</p>
+                     <a href="#" class="buy-button">Beli Sekarang</a>
+                </div>
+                <div class="produk-item">
+                <img src="D:\PRODUKSI WEBSITE\foto pembuatan web\logo inoac.jfif"align="center"width="80px"height="80px">
+                    <h3>Nama Produk 1</h3>
+                    <p>Rp100.000</p>
+                     <a href="#" class="buy-button">Beli Sekarang</a>
+                </div>
+               
+        </div>
+    </section>
+
+    <!-- Rekomendasi Produk -->
+    <section class="rekomendasi-produk">
+        <div class="container">
+             <div class="nav">
+             <b><p align="right"><a href="produkrekomendasi.html">Lihat semua</a></p></b>
+            <h3>Rekomendasi Untuk Anda</h3>
+
+            <div class="produk-list">
+                 <div class="produk-item">
+                <img src="D:\PRODUKSI WEBSITE\foto pembuatan web\logo inoac.jfif"align="center"width="80px"height="80px">
+                    <h3>Nama Produk 1</h3>
+                    <p>Rp100.000</p>
+                     <a href="#" class="buy-button">Beli Sekarang</a>
+                </div>
+                <div class="produk-item">
+                <img src="D:\PRODUKSI WEBSITE\foto pembuatan web\logo inoac.jfif"align="center"width="80px"height="80px">
+                    <h3>Nama Produk 1</h3>
+                    <p>Rp100.000</p>
+                     <a href="#" class="buy-button">Beli Sekarang</a>
+                </div>
+                <div class="produk-item">
+                <img src="D:\PRODUKSI WEBSITE\foto pembuatan web\logo inoac.jfif"align="center"width="80px"height="80px">
+                    <h3>Nama Produk 1</h3>
+                    <p>Rp100.000</p>
+                     <a href="#" class="buy-button">Beli Sekarang</a>
+                </div>
+        
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Perusahaan -->
+    <section class="info-perusahaan">
+        <div class="container">
+            <h2>Tentang Kami</h2>
+            <p>Kami adalah perusahaan yang berkomitmen untuk memberikan produk berkualitas dengan layanan terbaik.</p>
+            <div class="contact-info">
+                <p><P align="left"><strong>Nama Perusahaan:</strong>PT INOAC POLYTECHNO</P></p>
+                <p><P align="left"><strong>ALAMAT:</strong>Kawasan Bintang Puspita Teluk Jambe Barat Karawang</P></p>
+                <p><P align="left"><strong>TELEPON:</strong>0267-409852</P></p>
+                <p><P align="left"><strong>EMAIL:</strong></P></p>
+                <p><P align="left"><strong>WhatsApp:</strong></P></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <nav>
+                <ul>
+                </ul>
+            </nav>
+            <div class="social-media">
+                <a href="">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+            <b><p>Ini WM:ILHAM ALDI K</p></b>
+        </div>
+    </footer>
+      
+</body>
+</html>
